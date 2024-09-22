@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="./css/style.css">
+</head>
+<body>
+  <main class="main">
+    <div class="container">
+      <header class="header">
+        <h1 class="title">наша продукция</h1>
+        <div class="header__inner">
+          <div class="header__inner-products">
+            3 товара <br>
+            на сумму 3 500 ₽
+            <img src="./images/basket.svg" alt="" class="header__inner-basket" id="basket">
+            <span class="basket__count">0</span>
+          </div>
+          <button class="header__inner-button" id="signout">Выйти</button>
+        </div>
+      </header>
+
+      <section class="products-list">
+        <div class="products-card">
+          <img src="./images/1.svg" alt="" class="products-card__preview">
+          <h2 class="products-card__title">
+            Устрицы по рокфеллеровски
+          </h2>
+          <p class="products-card__description">
+            Значимость этих проблем настолько очевидна, что укрепление и развитие структуры 
+          </p>
+          <div class="products-card__bottom">
+            <span class="products-card__bottom-price">
+              2 700 ₽
+            </span>
+            <button class="products-card__bottom-btn" id="add-basket"></button>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <div class="modal">
+      <div class="modal__overlay"></div>
+      <div class="modal__inner">
+        <span class="modal__inner-close" id="close-modal"></span>
+        <h3 class="modal__inner-title">Корзина с выбранными товарами</h3>
+
+        <div class="modal__inner-list">
+          <div class="products-card">
+            <img src="./images/1.svg" alt="" class="products-card__preview">
+            <h2 class="products-card__title">
+              Устрицы по рокфеллеровски
+            </h2>
+            <p class="products-card__description">
+              Значимость этих проблем настолько очевидна, что укрепление и развитие структуры 
+            </p>
+            <div class="products-card__count card__count">
+              <span class="card__count-minus" id="plus">-</span>
+              <span class="card__count-result" id="count-product">1</span>
+              <span class="card__count-plus" id="minus">+</span>
+            </div>
+            <div class="products-card__bottom">
+              <span class="products-card__bottom-price">
+                2 700 ₽
+              </span>
+              <button class="products-card__bottom-btn" id="remove-basket"></button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <script src="./scripts/index.js"></script>
+</body>
+</html>

@@ -1,0 +1,296 @@
+* {
+  box-sizing: border-box;
+}
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: "";
+  content: none;
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+button {
+  border: none;
+}
+
+.container {
+  max-width: 1300px;
+  margin: 0 auto;
+}
+
+.main {
+  padding-top: 52px;
+  background-color: #161516;
+  color: #FFFFFF;
+}
+.main .products-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 35px 20px;
+  height: calc(100vh - 177px);
+  overflow: auto;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 75px;
+}
+.header .title {
+  font-size: 32px;
+}
+.header__inner, .header__inner-products {
+  display: flex;
+  align-items: center;
+  gap: 45px;
+}
+.header__inner-products {
+  position: relative;
+  font-size: 17px;
+  line-height: 22px;
+  text-align: right;
+}
+.header__inner-products .basket__count {
+  position: absolute;
+  right: -20px;
+  top: -20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-height: 45px;
+  max-width: 45px;
+  padding: 5px;
+  font-size: 22px;
+  background-color: #D58C51;
+  border-radius: 50%;
+}
+.header__inner-basket {
+  cursor: pointer;
+  transition: 0.5s;
+}
+.header__inner-basket:hover {
+  opacity: 0.6;
+}
+.header__inner-button {
+  padding: 12px 85px;
+  color: #D58C51;
+  border: 1px solid #D58C51;
+  background-color: transparent;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.header__inner-button:hover {
+  background-color: #D58C51;
+  color: #131313;
+}
+
+.products-card {
+  display: flex;
+  flex-direction: column;
+  padding: 45px 20px 32px 20px;
+  height: 550px;
+  max-width: 310px;
+  border: 1px solid #D58C51;
+  transition: 0.5s;
+}
+.products-card:hover {
+  color: #D58C51;
+}
+.products-card__preview {
+  margin-bottom: 32px;
+  width: 100%;
+}
+.products-card__title {
+  font-size: 17px;
+  margin-bottom: 14px;
+}
+.products-card__description {
+  font-size: 14px;
+  line-height: 18px;
+}
+.products-card .card__count {
+  display: flex;
+  gap: 10px;
+}
+.products-card__count .card__count-minus, .products-card__count .card__count-result, .products-card__count .card__count-plus {
+  font-size: 24px;
+}
+.products-card__count .card__count-minus, .products-card__count .card__count-plus {
+  cursor: pointer;
+}
+.products-card__count .card__count-minus:hover, .products-card__count .card__count-plus:hover {
+  color: #D58C51;
+}
+.products-card__bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: auto;
+}
+.products-card__bottom-price {
+  font-size: 17px;
+}
+.products-card__bottom-btn {
+  position: relative;
+  width: 30px;
+  height: 30px;
+  background-color: transparent;
+  border-radius: 50%;
+  border: 1px solid #FFFFFF;
+  cursor: pointer;
+  transition: 0.5s;
+}
+.products-card__bottom-btn:hover {
+  background-color: #D58C51;
+  border-color: #D58C51;
+}
+.products-card__bottom-btn::before, .products-card__bottom-btn::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 12px;
+  height: 2px;
+  background-color: #FFFFFF;
+}
+.products-card__bottom-btn::after {
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  inset: 0;
+  color: #000000;
+  visibility: hidden;
+}
+.modal__overlay {
+  position: fixed;
+  inset: 0;
+  background-color: rgba(128, 128, 128, 0.631372549);
+}
+.modal__inner {
+  position: relative;
+  z-index: 2;
+  padding: 15px 30px;
+  height: 640px;
+  width: 800px;
+  background-color: #161516;
+  color: #FFFFFF;
+}
+.modal__inner-title {
+  font-size: 32px;
+  margin-bottom: 20px;
+}
+.modal__inner-close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  display: inline-block;
+  height: 30px;
+  width: 30px;
+  border: 1px solid #FFFFFF;
+  border-radius: 50%;
+  transition: 0.5s;
+  cursor: pointer;
+}
+.modal__inner-close::before, .modal__inner-close::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 2px;
+  width: 15px;
+  background-color: #FFFFFF;
+  transform: translate(-50%, -50%);
+}
+.modal__inner-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+.modal__inner-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+.modal__inner-close:hover {
+  background-color: #D58C51;
+}
+.modal__inner-list {
+  height: calc(100% - 50px);
+  overflow: auto;
+}
+.modal__inner-list .products-card {
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 10px;
+  max-width: 100%;
+  height: -moz-max-content;
+  height: max-content;
+  margin-bottom: 15px;
+}
+.modal__inner-list .products-card:hover {
+  color: #FFFFFF;
+}
+.modal__inner-list .products-card__preview {
+  width: 150px;
+  margin-bottom: 0;
+}
+.modal__inner-list .products-card__title {
+  margin-bottom: 0;
+}
+.modal__inner-list .products-card__description {
+  display: none;
+}
+.modal__inner-list .products-card__bottom {
+  margin-top: 0;
+  gap: 15px;
+}
+.modal__inner-list .products-card__bottom-btn {
+  transform: rotate(45deg);
+}/*# sourceMappingURL=style.css.map */
