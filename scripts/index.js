@@ -60,7 +60,8 @@ wrapper.prepend(priceSum);
 wrapper.prepend(itemsQty);
 orderInfo.prepend(wrapper);
 
-const renderCard = (card) => { // рендер 1 карточки товара на главной странице
+const renderCard = (card) => {
+  // рендер 1 карточки товара на главной странице
   const clonedCard = firstCard.cloneNode(true);
   const preview = clonedCard.querySelector('.products-card__preview');
   const title = clonedCard.querySelector('.products-card__title');
@@ -94,7 +95,8 @@ const pluralize = (count) => {
   return `${count} товаров`;
 };
 
-const renderBasketCounter = () => { // расчет общей суммы и кол-ва товара в корзине
+const renderBasketCounter = () => {
+  // расчет общей суммы и кол-ва товара в корзине
   qtyBasketIcon.textContent = basketList.length;
 
   if (basketList.length === 0) {
@@ -110,7 +112,8 @@ const renderBasketCounter = () => { // расчет общей суммы и к�
   }
 };
 
-const renderBasket = (cardList) => { // рендер корзины
+const renderBasket = (cardList) => {
+  // рендер корзины
   basketOrdersList.innerHTML = '';
   cardList.forEach((card) => {
     const clonedCard = firstBasketCard.cloneNode(true);
@@ -153,7 +156,8 @@ const renderBasket = (cardList) => { // рендер корзины
   });
 };
 
-const handleAddToBasket = (event) => { // клик "добавить в корзину"
+const handleAddToBasket = (event) => {
+  // клик "добавить в корзину"
   const targetCard = event.target.closest('.products-card');
   const existingCard = basketList.find((card) => card.id === Number(targetCard.id));
 
@@ -169,22 +173,28 @@ const handleAddToBasket = (event) => { // клик "добавить в корз
   renderBasket(basketList);
 };
 
-const closeModal = () => { // закрытие модального окна
+const closeModal = () => {
+  // закрытие модального окна
   const modal = document.querySelector('.modal');
   const closeBtn = modal.querySelector('#close-modal');
   const cards = modal.querySelectorAll('.products-card');
 
-  cards.forEach((card) => (card.style.transition = 'none'));
+  cards.forEach((card) => {
+    card.style.transition = 'none';
+  });
   modal.style.visibility = 'hidden';
   closeBtn.removeEventListener('click', closeModal);
 };
 
-const openModal = () => { // открытие модального окна
+const openModal = () => {
+  // открытие модального окна
   const modal = document.querySelector('.modal');
   const cards = modal.querySelectorAll('.products-card');
   const closeBtn = modal.querySelector('#close-modal');
 
-  cards.forEach((card) => (card.style.transition = '0.5s'));
+  cards.forEach((card) => {
+    card.style.transition = '0.5s';
+  });
   modal.style.visibility = 'visible';
   closeBtn.addEventListener('click', closeModal);
 };

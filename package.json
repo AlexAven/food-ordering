@@ -11,5 +11,8 @@
   "scripts": {
     "lint": "eslint .",
     "prettier": "prettier"
+  },
+  "dependencies": {
+    "on-change": "^5.0.1"
   }
 }
