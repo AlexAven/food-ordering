@@ -48,8 +48,12 @@ function app() {
     referenceCard: document.querySelector('.products-list .products-card'),
     productsListContainer: document.querySelector('.products-list'),
     productsCard: document.querySelector('.products-list .products-card'),
+    basketProductsCard: document.querySelector('.modal__inner-list .products-card'),
+    productsBasketListContainer: document.querySelector('.modal__inner-list'),
+    modalBasket: document.querySelector('.modal'),
+    btnOpenModalBasket: document.querySelector('#basket'),
+    btnCloseModalBasket: document.querySelector('#close-modal'),
     updateInfoBasketProducts: (basket) => {
-      // countElemtn.textContent = count;
       const itemsQty = document.querySelector('.header__inner-qty');
       const priceSum = document.querySelector('.header__inner-sum');
       view.qtyBasketIcon.textContent = basket.length;
@@ -96,20 +100,45 @@ function app() {
   renderCard(state.products);
 
   function addBasketProduct(card) {
-    const cardInBasket = state.basket.find((item) => item.id === Number(card.id));
+    const cardInBasket = state.basket.findIndex((item) => item.id === Number(card.id));
 
-    if (cardInBasket) {
-      cardInBasket.count += 1;
+    if (cardInBasket !== -1) {
+      state.basket[cardInBasket].count += 1;
     } else {
       state.basket.push({
         ...card,
         count: 1,
       });
     }
+    renderBasketCard();
     view.updateInfoBasketProducts(state.basket);
-    // renderBasket(basketList);
-    // логика добавления
-    // запуск функции
+  }
+
+  function renderBasketCard() {
+    view.basketProductsCard.remove();
+    view.productsBasketListContainer.innerHTML = '';
+    state.basket.forEach((card) => {
+      const clonedBasketCard = view.basketProductsCard.cloneNode(true);
+      const plus = clonedBasketCard.querySelector('#plus');
+      const preview = clonedBasketCard.querySelector('.products-card__preview');
+      const title = clonedBasketCard.querySelector('.products-card__title');
+      const description = clonedBasketCard.querySelector('.products-card__description');
+      const price = clonedBasketCard.querySelector('.products-card__bottom-price');
+      const productQty = clonedBasketCard.querySelector('#count-product');
+      const increaseQty = clonedBasketCard.querySelector('#plus');
+      const decreaseQty = clonedBasketCard.querySelector('#minus');
+      const removeProduct = clonedBasketCard.querySelector('.products-card__bottom-btn');
+
+      preview.src = card.preview;
+      preview.setAttribute('alt', `dish-photo#${card.id}`);
+      title.textContent = card.title;
+      description.textContent = card.description;
+      price.textContent = `${(card.price * card.count).toLocaleString('ru-RU')} ₽`;
+      productQty.textContent = card.count;
+      view.productsBasketListContainer.append(clonedBasketCard);
+
+      plus.addEventListener('click', () => addBasketProduct(card));
+    });
   }
 
   function pluralize(count) {
@@ -127,6 +156,17 @@ function app() {
     }
     return `${count} товаров`;
   }
+  function toggleModalBsket() {
+    view.modalBasket.classList.toggle('modal__active');
+    state.uiState.modal.isOpen = !state.uiState.modal.isOpen;
+
+    if (state.uiState.modal.isOpen) {
+      renderBasketCard();
+    }
+  }
+
+  view.btnOpenModalBasket.addEventListener('click', toggleModalBsket);
+  view.btnCloseModalBasket.addEventListener('click', toggleModalBsket);
   view.updateInfoBasketProducts(state.basket);
 }
 

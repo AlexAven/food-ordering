@@ -203,18 +203,20 @@ button {
 }
 
 .modal {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
   inset: 0;
   color: #000000;
-  visibility: hidden;
 }
 .modal__overlay {
   position: fixed;
   inset: 0;
   background-color: rgba(128, 128, 128, 0.631372549);
+}
+.modal__active {
+  display: flex;
 }
 .modal__inner {
   position: relative;

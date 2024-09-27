@@ -1,16 +1,19 @@
 .modal {
-  display: flex;
+  display: none;
   justify-content: center;
   align-items: center;
   position: fixed;
   inset: 0;
   color: #000000;
-  visibility: hidden;
 
   &__overlay {
     position: fixed;
     inset: 0;
     background-color: #808080a1;
+  }
+
+  &__active {
+    display: flex;
   }
 
   &__inner {
