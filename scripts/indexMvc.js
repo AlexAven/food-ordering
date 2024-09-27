@@ -92,23 +92,31 @@ function app() {
       price.textContent = `${card.price.toLocaleString('ru-RU')} ₽`;
 
       const addButton = clonedCard.querySelector('#add-basket');
-      addButton.addEventListener('click', () => addBasketProduct(card));
+      addButton.addEventListener('click', () => addBasketProduct(card, addButton.id));
 
       view.productList.append(clonedCard);
     });
   };
   renderCard(state.products);
 
-  function addBasketProduct(card) {
+  function addBasketProduct(card, eventId) {
     const cardInBasket = state.basket.findIndex((item) => item.id === Number(card.id));
-
-    if (cardInBasket !== -1) {
-      state.basket[cardInBasket].count += 1;
-    } else {
-      state.basket.push({
-        ...card,
-        count: 1,
-      });
+    if (eventId === 'add-basket' || eventId === 'plus') {
+      if (cardInBasket !== -1) {
+        state.basket[cardInBasket].count += 1;
+      } else {
+        state.basket.push({
+          ...card,
+          count: 1,
+        });
+      }
+    } else if (eventId === 'remove-basket') {
+      state.basket.splice(cardInBasket, 1);
+    } else if (eventId === 'minus') {
+      state.basket[cardInBasket].count -= 1;
+      if (state.basket[cardInBasket].count === 0) {
+        state.basket.splice(cardInBasket, 1);
+      }
     }
     renderBasketCard();
     view.updateInfoBasketProducts(state.basket);
@@ -119,7 +127,6 @@ function app() {
     view.productsBasketListContainer.innerHTML = '';
     state.basket.forEach((card) => {
       const clonedBasketCard = view.basketProductsCard.cloneNode(true);
-      const plus = clonedBasketCard.querySelector('#plus');
       const preview = clonedBasketCard.querySelector('.products-card__preview');
       const title = clonedBasketCard.querySelector('.products-card__title');
       const description = clonedBasketCard.querySelector('.products-card__description');
@@ -127,7 +134,7 @@ function app() {
       const productQty = clonedBasketCard.querySelector('#count-product');
       const increaseQty = clonedBasketCard.querySelector('#plus');
       const decreaseQty = clonedBasketCard.querySelector('#minus');
-      const removeProduct = clonedBasketCard.querySelector('.products-card__bottom-btn');
+      const removeProduct = clonedBasketCard.querySelector('#remove-basket');
 
       preview.src = card.preview;
       preview.setAttribute('alt', `dish-photo#${card.id}`);
@@ -137,7 +144,9 @@ function app() {
       productQty.textContent = card.count;
       view.productsBasketListContainer.append(clonedBasketCard);
 
-      plus.addEventListener('click', () => addBasketProduct(card));
+      increaseQty.addEventListener('click', (event) => addBasketProduct(card, event.target.id));
+      decreaseQty.addEventListener('click', (event) => addBasketProduct(card, event.target.id));
+      removeProduct.addEventListener('click', (event) => addBasketProduct(card, event.target.id));
     });
   }
 
